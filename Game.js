@@ -340,10 +340,10 @@ async function draw () {
 			// 	"score": highscore,
 			// 	"playerName": player
 			// });
-			 let response = await axios.post("https://tragically-goose-74465.herokuapp.com/leaderboard", {
-			 	"score": score,
-			 	"playerName": player
-			 });
+			//  let response = await axios.post("https://tragically-goose-74465.herokuapp.com/leaderboard", {
+			//  	"score": score,
+			//  	"playerName": player
+			//  });
 		}
 
 	}	
