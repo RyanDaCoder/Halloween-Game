@@ -252,11 +252,23 @@ async function draw () {
 	knife2.draw();
 	knife3.draw();
 	if (gameOver) {
+<<<<<<< HEAD
 		var url = new URL("https://tragically-goose-74465.herokuapp.com/test");
 		url.searchParams.append("rows", "3");
 		url.searchParams.append("offset", "0");
 		let response = await axios.get(url);
 		leaderboard = response.data;
+=======
+		if (leaderboard === null) {
+			var url = new URL("https://tragically-goose-74465.herokuapp.com/test");
+			url.searchParams.append("rows", "3");
+			url.searchParams.append("offset", "0");
+			let response = await axios.get(url);
+			leaderboard = response.data;
+		}
+		
+		
+>>>>>>> 9c2b2e5817117147cd1cdc901305188b32baa8c0
 		knife.x = 5550;
 		knife.speed = 0;
 		knife1.x = 5550;
