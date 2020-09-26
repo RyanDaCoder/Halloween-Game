@@ -4,7 +4,6 @@ if (!player) {
 	localStorage.setItem('player', player);
 }
 
-
 var canvas = document.getElementById("gameCanvas");
 var ctx = canvas.getContext('2d');
 var activeGame = false;
@@ -24,23 +23,19 @@ halloweenMusic.play();
 var leaderboard = null;
 var score = 0;
 var highscore = localStorage.getItem("highscore");
-
-
-
-//pumpkin normal image
 var pumpkinImage = new Image();
 pumpkinImage.src = "images/pumpkinImage.png";
-//jack-o-lantern images
-//1st
+
+
 var jack1Image = new Image();
 jack1Image.src="images/pumpkin1.png";
-//2nd
+
 var jack2Image = new Image();
 jack2Image.src="images/pumpkin2.png";
-//3rd
+
 var jack3Image = new Image();
 jack3Image.src ="images/pumpkin3.png";
-//knife images
+
 var KnifeImage = new Image();
 KnifeImage.src="images/knife.png";
 
@@ -93,7 +88,6 @@ var knife = {
 	speed: 15,
 	move: function() {
 		this.x -= this.speed;
-		
 		if (this.x <= -40) {
 			this.x = 1100;
 			this.y = Math.random()*650;
@@ -103,7 +97,6 @@ var knife = {
 	},
 	draw: function() {
 			ctx.drawImage(KnifeImage, this.x, this.y, this.width, this.height);
-			
 		}
 	}
 
@@ -115,20 +108,17 @@ var knife = {
 		speed: 15,
 		move: function() {
 			this.x -= this.speed;
-			
 			if (this.x <= -40) {
 				this.x = 1500;
 				this.y = Math.random()*650;
 				score++;
-				
 			}	
 		},
 		draw: function() {
 				ctx.drawImage(KnifeImage, this.x, this.y, this.width, this.height);
 				
-			}
 		}
-
+	}
 		var knife2 = {
 			width: 50,
 			height: 50, 
@@ -142,12 +132,10 @@ var knife = {
 					this.x = 1855;
 					this.y = Math.random()*650;
 					score++;
-					
 				}	
 			},
 			draw: function() {
 					ctx.drawImage(KnifeImage, this.x, this.y, this.width, this.height);
-					
 			}
 		}
 
@@ -168,11 +156,10 @@ var knife = {
 				}	
 			},
 			draw: function() {
-					ctx.drawImage(KnifeImage, this.x, this.y, this.width, this.height);
-					
+					ctx.drawImage(KnifeImage, this.x, this.y, this.width, this.height);	
 			}
 		}
-
+	
 var keys = [];
 
 window.onkeydown = function (e) {
@@ -206,14 +193,14 @@ function movement () {
 		pumpkinImage.src="images/pumpkin1.png";
 		gameOver = true;
 	}
-
+	
 	if (checkCollisions(pumpkin, knife1)) {
 		knife1.x = 1500;
 		knife1.y = Math.random()*690;
 		pumpkinImage.src="images/pumpkin2.png";
 		gameOver = true;
 	}
-
+	
 	if (checkCollisions(pumpkin, knife2)) {
 		knife2.x = 1855;
 		knife2.y = Math.random()*690;
@@ -249,7 +236,9 @@ function drawText() {
 	ctx.fillStyle="orange";
 	ctx.font = "50px Comic Sans MS";
 	ctx.fillText("Name    |    Score", 300, 400);
+	
 	const {username, score} = leaderboard[0];
+
 	ctx.fillText("1. " + leaderboard[0].username + "         " + leaderboard[0].score, 300, 450);
 	ctx.fillText("2. " + leaderboard[1].username + "    " + leaderboard[1].score, 300, 500);
 	ctx.fillText("3. " + leaderboard[2].username + "          " + leaderboard[2].score, 300, 550);
@@ -263,6 +252,11 @@ async function draw () {
 	knife2.draw();
 	knife3.draw();
 	if (gameOver) {
+		var url = new URL("https://tragically-goose-74465.herokuapp.com/test");
+		url.searchParams.append("rows", "3");
+		url.searchParams.append("offset", "0");
+		let response = await axios.get(url);
+		leaderboard = response.data;
 		if (leaderboard === null) {
 			var url = new URL("https://tragically-goose-74465.herokuapp.com/test");
 			url.searchParams.append("rows", "3");
@@ -278,8 +272,8 @@ async function draw () {
  		knife2.x = 5550;
  		knife2.speed = 0;
  		knife3.x = 5550;
-		 knife3.speed = 0;
-
+		knife3.speed = 0;
+		 
 		if(highscore !== null){
 			if (score > highscore) {
 				localStorage.setItem("highscore", score); 
@@ -288,8 +282,8 @@ async function draw () {
 		else{
 			localStorage.setItem("highscore", score);
 		}
+		
 		if (sendGameOver === false) {
-			console.log(highscore);
 			sendGameOver = true;
 		}
 	}	
