@@ -1,11 +1,3 @@
-
-/**
- * see if we have a name
- * If we already have name, dont ask "what is your name"
- * if we dont have a name, ask what is ur name
- * save player into local storage called player
- */
-
 var player = localStorage.getItem('player');
 if (!player) {
 	player = prompt("What is your name?");
@@ -107,7 +99,6 @@ var knife = {
 			this.y = Math.random()*650;
 			score++;
 			
-			
 		}	
 	},
 	draw: function() {
@@ -182,8 +173,6 @@ var knife = {
 			}
 		}
 
-
-
 var keys = [];
 
 window.onkeydown = function (e) {
@@ -194,7 +183,6 @@ window.onkeyup = function (e) {
 	keys[e.key] = false;
 };
 
-// MAIN GAME LOOP- startGame() will begin the loop
 function startGame() {
 	drawScreen();
 	drawBackground();
@@ -205,13 +193,6 @@ function startGame() {
 	window.requestAnimationFrame(startGame)
 }
 
-
-// Starts the gameLoop and hides buttons & directions
-// function startGame() {
-// 	activeGame = window.requestAnimationFrame(gameLoop, 30);
-// }
-
-
 function movement () {
 	pumpkin.move();
 	knife.move();
@@ -219,30 +200,25 @@ function movement () {
 	knife2.move();
 	knife3.move();
 
-	// collision detection 
-	//first
 	if (checkCollisions(pumpkin, knife)) {
 		knife.x = 1100;
 		knife.y = Math.random()*690;
 		pumpkinImage.src="images/pumpkin1.png";
 		gameOver = true;
-		
 	}
-	//second
+
 	if (checkCollisions(pumpkin, knife1)) {
 		knife1.x = 1500;
 		knife1.y = Math.random()*690;
 		pumpkinImage.src="images/pumpkin2.png";
 		gameOver = true;
-		
 	}
-	//third
+
 	if (checkCollisions(pumpkin, knife2)) {
 		knife2.x = 1855;
 		knife2.y = Math.random()*690;
 		pumpkinImage.src="images/pumpkin3.png";
 		gameOver = true;
-		
 	}
 
 	if (checkCollisions(pumpkin, knife3)) {
@@ -250,7 +226,6 @@ function movement () {
 		knife3.y = Math.random()*690;
 		pumpkinImage.src="images/pumpkin3.png";
 		gameOver = true;
-		
 	}
 }
 
@@ -264,8 +239,6 @@ function drawBackground () {
 
 }
 
-
-
 function drawText() {
 	if (!gameOver || leaderboard == null) {
 		return;
@@ -273,21 +246,14 @@ function drawText() {
 	ctx.fillStyle="orange";
 	ctx.font = "30px Arial";
 	ctx.fillText("Game Over", 250, 300);
-
 	ctx.fillStyle="orange";
 	ctx.font = "50px Comic Sans MS";
 	ctx.fillText("Name    |    Score", 300, 400);
-	
-	//ctx.fillText("data: " + leaderboard[0], 250, 450);
 	const {username, score} = leaderboard[0];
-	
-	//console.log(username, score);
-	//console.log(leaderboard);
 	ctx.fillText("1. " + leaderboard[0].username + "         " + leaderboard[0].score, 300, 450);
 	ctx.fillText("2. " + leaderboard[1].username + "    " + leaderboard[1].score, 300, 500);
 	ctx.fillText("3. " + leaderboard[2].username + "          " + leaderboard[2].score, 300, 550);
 }
-
 
 let sendGameOver = false;
 async function draw () {
@@ -305,7 +271,6 @@ async function draw () {
 			leaderboard = response.data;
 		}
 		
-		
 		knife.x = 5550;
 		knife.speed = 0;
 		knife1.x = 5550;
@@ -314,59 +279,25 @@ async function draw () {
  		knife2.speed = 0;
  		knife3.x = 5550;
 		 knife3.speed = 0;
-		 
-		
-		
-		 
-		
-
 
 		if(highscore !== null){
 			if (score > highscore) {
 				localStorage.setItem("highscore", score); 
-				//window.location.href="index.html";
-     
 			}
 		}
 		else{
 			localStorage.setItem("highscore", score);
 		}
-		
-		//get req will go here for the name and score from db
-		
 		if (sendGameOver === false) {
 			console.log(highscore);
 			sendGameOver = true;
-			//post to database   OLD ONE
-			// let response = await axios.post("http://localhost:3001/leaderboard", {
-			// 	"score": highscore,
-			// 	"playerName": player
-			// });
-			//  let response = await axios.post("https://tragically-goose-74465.herokuapp.com/leaderboard", {
-			//  	"score": score,
-			//  	"playerName": player
-			//  });
 		}
-
 	}	
 }
 
 function drawScreen() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
-
-
-
-//  function gameOver() {
-	
-//  	setInterval(up(), 1000/60);
-	
-//  	//setTimeout(function(){ window.location.href="index.html"; }, 3000);
-//  	//document.getElementById("hi").innerHTML = "GAME OVER";
-//  	//document.getElementById("hii").innerHTML = "Play Again!";
-//  }
-
-
 
 function drawScore() {
 	ctx.fillStyle="orange";
@@ -379,7 +310,6 @@ function drawScore() {
 		knife3.speed = 20;
 		backgroundSpeed=5.5;
 	}
-
 	if (score >= 30) {
 		knife.speed = 25;
 		knife1.speed = 25;
@@ -387,7 +317,6 @@ function drawScore() {
 		knife3.speed = 25;
 		backgroundSpeed=7;
 	}
-
 	if (score >= 45) {
 		knife.speed = 30;
 		knife1.speed = 30;
@@ -395,7 +324,6 @@ function drawScore() {
 		knife3.speed = 30;
 		backgroundSpeed=8.5;
 	}
-
 	if (score >= 60) {
 		knife.speed = 35;
 		knife1.speed = 35;
@@ -403,7 +331,6 @@ function drawScore() {
 		knife3.speed = 35;
 		backgroundSpeed=10;
 	}
-
 	if (score >= 75) {
 		knife.speed = 40;
 		knife1.speed = 40;
@@ -411,7 +338,6 @@ function drawScore() {
 		knife3.speed = 40;
 		backgroundSpeed=11.5;
 	}
-
 	if (score >= 100) {
 		knife.speed = 50;
 		knife1.speed = 50;
@@ -420,8 +346,6 @@ function drawScore() {
 		backgroundSpeed=13;
 	}
 }
-
-
 
 function checkCollisions(param1, param2) {
 	if (param1.x < param2.x + param2.width &&
