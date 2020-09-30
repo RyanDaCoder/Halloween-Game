@@ -285,6 +285,7 @@ async function draw () {
 		
 		if (sendGameOver === false) {
 			sendGameOver = true;
+			
 		}
 	}	
 }
