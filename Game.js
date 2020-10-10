@@ -282,7 +282,7 @@ async function draw () {
 		if (sendGameOver === false) {
 			sendGameOver = true;
 			let response = await axios.post(window.location.href + "leaderboard", {
-			 	"score": highscore,
+			 	"score": score,
 			 	"playerName": player
 			});
 		}
