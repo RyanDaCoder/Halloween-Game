@@ -92,6 +92,7 @@ var knife = {
 			this.x = 1100;
 			this.y = Math.random()*650;
 			score++;
+			
 		}	
 	},
 	draw: function() {
@@ -116,7 +117,8 @@ var knife = {
 		draw: function() {
 				ctx.drawImage(KnifeImage, this.x, this.y, this.width, this.height);
 				
-			}
+		}
+	}
 		var knife2 = {
 			width: 50,
 			height: 50, 
@@ -157,7 +159,7 @@ var knife = {
 					ctx.drawImage(KnifeImage, this.x, this.y, this.width, this.height);	
 			}
 		}
-
+	
 var keys = [];
 
 window.onkeydown = function (e) {
@@ -190,7 +192,6 @@ function movement () {
 		knife.y = Math.random()*690;
 		pumpkinImage.src="images/pumpkin1.png";
 		gameOver = true;
-		
 	}
 	
 	if (checkCollisions(pumpkin, knife1)) {
@@ -232,7 +233,6 @@ function drawText() {
 	ctx.fillStyle="orange";
 	ctx.font = "30px Arial";
 	ctx.fillText("Game Over", 250, 300);
-
 	ctx.fillStyle="orange";
 	ctx.font = "50px Comic Sans MS";
 	ctx.fillText("Name    |    Score", 300, 400);
@@ -304,7 +304,6 @@ function drawScore() {
 		knife3.speed = 20;
 		backgroundSpeed=5.5;
 	}
-
 	if (score >= 30) {
 		knife.speed = 25;
 		knife1.speed = 25;
@@ -312,7 +311,6 @@ function drawScore() {
 		knife3.speed = 25;
 		backgroundSpeed=7;
 	}
-
 	if (score >= 45) {
 		knife.speed = 30;
 		knife1.speed = 30;
@@ -320,7 +318,6 @@ function drawScore() {
 		knife3.speed = 30;
 		backgroundSpeed=8.5;
 	}
-
 	if (score >= 60) {
 		knife.speed = 35;
 		knife1.speed = 35;
@@ -328,7 +325,6 @@ function drawScore() {
 		knife3.speed = 35;
 		backgroundSpeed=10;
 	}
-
 	if (score >= 75) {
 		knife.speed = 40;
 		knife1.speed = 40;
@@ -336,7 +332,6 @@ function drawScore() {
 		knife3.speed = 40;
 		backgroundSpeed=11.5;
 	}
-
 	if (score >= 100) {
 		knife.speed = 50;
 		knife1.speed = 50;
@@ -345,8 +340,6 @@ function drawScore() {
 		backgroundSpeed=13;
 	}
 }
-
-
 
 function checkCollisions(param1, param2) {
 	if (param1.x < param2.x + param2.width &&
