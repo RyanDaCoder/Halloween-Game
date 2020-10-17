@@ -230,7 +230,7 @@ function drawText() {
 	if (!gameOver || leaderboard == null) {
 		return;
 	}
-	setTimeout(function(){
+	//setTimeout(function(){
 	ctx.fillStyle="orange";
 	ctx.font = "30px Arial";
 	ctx.fillText("Game Over", 250, 300);
@@ -243,7 +243,7 @@ function drawText() {
 	ctx.fillText("1. " + leaderboard[0].username + "         " + leaderboard[0].score, 300, 450);
 	ctx.fillText("2. " + leaderboard[1].username + "    " + leaderboard[1].score, 300, 500);
 	ctx.fillText("3. " + leaderboard[2].username + "          " + leaderboard[2].score, 300, 550); 
-	}, 1000);
+	//}, 1000);
 	
 }
 
